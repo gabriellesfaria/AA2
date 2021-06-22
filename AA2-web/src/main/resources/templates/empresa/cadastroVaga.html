@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+	<section class="layout-content" layout:fragment="corpo">
+
+		<nav class="navbar navbar-expand-md bg-light">
+			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><i class="oi oi-caret-right"></i>
+						<span th:text="#{vaga.cadastrar.label}"></span></li>
+				</ul>
+				<a class="btn btn-primary btn-md" th:href="@{/empresas/listarVagas}"
+					role="button"> <span class="oi oi-spreadsheet" title="Listar"
+					aria-hidden="true"></span> <span th:text="#{vaga.listar.label}"></span>
+				</a>
+			</div>
+		</nav>
+
+		<div class="container" id="cadastro">
+
+			<div th:replace="fragments/alert"></div>
+
+			<form
+				th:action="@{/empresas/salvarVagas}"
+				th:object="${vaga}" method="POST">
+									
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label th:text="#{vaga.nome.label}" for="nome"></label> 
+						<input type="text" class="form-control" id="nome"
+							th:placeholder="#{vaga.nome.label}"
+							autofocus="autofocus" th:field="*{nome}"
+							th:classappend="${#fields.hasErrors('nome')} ? is-invalid" />
+
+						<div class="invalid-feedback">
+							<span th:errors="*{nome}"></span>
+						</div>
+					</div>
+					
+					<div class="form-group col-md-6">
+						<label th:text="#{vaga.descricao.label}" for="descricao"></label> 
+						<input type="text" class="form-control" id="descricao"
+							th:placeholder="#{vaga.descricao.label}"
+							autofocus="autofocus" th:field="*{descricao}"
+							th:classappend="${#fields.hasErrors('descricao')} ? is-invalid" />
+
+						<div class="invalid-feedback">
+							<span th:errors="*{descricao}"></span>
+						</div>
+					</div>
+					
+				
+					<div class="form-group col-md-6">
+						<label th:text="#{vaga.salario.label}" for="salario"></label> 
+						<input type="text" class="form-control" id="salario"
+							th:placeholder="0.00"
+							autofocus="autofocus" th:field="*{salario}"
+							th:classappend="${#fields.hasErrors('salario')} ? is-invalid"
+							data-mask="000000000.00" data-mask-reverse="false" />
+
+						<div class="invalid-feedback">
+							<span th:errors="*{salario}"></span>
+						</div>
+					</div>
+					
+					<div class="form-group col-md-6">
+						<label th:text="#{vaga.limite.label}" for="dataLimite"></label> 
+						<input type="date" class="form-control" id="dataLimite" th:field="*{dataLimite}"
+							th:placeholder="#{vaga.limite.label}" autofocus="autofocus"
+							th:classappend="${#fields.hasErrors('dataLimite')} ? is-invalid" />
+							
+						<div class="invalid-feedback">
+							<span th:errors="*{dataLimite}"></span>
+						</div>
+					</div>
+					<div class="form-group col-md-6">
+						<label th:text="#{vaga.status.label}" for="status"></label> 
+						<select id="status" class="form-control" th:field="*{status}"
+							th:classappend="${#fields.hasErrors('status')} ? is-invalid">
+							<option value=""><span th:text="#{vaga.aberto.label}"></span></option>
+							<option value=""><span th:text="#{vaga.naoselec.label}"></span></option>
+							<option value=""><span th:text="#{vaga.entrevista.label}"></span></option>
+						</select>
+						<div class="invalid-feedback">
+							<span th:errors="*{status}"></span>
+						</div>
+						</div>
+					</div>
+					<input type="hidden" th:field="*{empresa}" id="empresa">
+				<button type="submit" th:text="#{button.salvar.label}"
+					class="btn btn-primary btn-sm"></button>
+			</form>
+		</div>
+	</section>
+</body>
+</html>
