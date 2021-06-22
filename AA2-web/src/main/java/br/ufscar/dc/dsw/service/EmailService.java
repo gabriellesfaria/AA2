@@ -1,75 +1,47 @@
 package br.ufscar.dc.dsw.service;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.Properties;
-import br.ufscar.dc.dsw.controller.EmpresaController;
 
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.Multipart;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Service;
+
+@Service
 public class EmailService {
+
+	@Autowired
+	JavaMailSender emailSender;
 
 	public void send(InternetAddress from, InternetAddress to, String subject, String body, File file) {
 
 		try {
+			MimeMessage message = emailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-			Properties prop = new Properties();
-			InputStream is = EmpresaController.class.getClassLoader().getResourceAsStream("application.properties");
+			helper.setFrom(from);
+			helper.setTo(to);
+			helper.setSubject(subject);
+			helper.setText(body);
 
-			if (is != null) {
-				prop.load(is);
-			} else {
-				throw new FileNotFoundException("application.properties not found in the classpath");
-			}
-
-			String username = prop.getProperty("spring.mail.username");
-			String password = prop.getProperty("spring.mail.password");
-
-			Session session = Session.getInstance(prop, new Authenticator() {
-				@Override
-				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication(username, password);
-				}
-			});
-
-			Message message = new MimeMessage(session);
-			message.setFrom(from);
-			message.setRecipient(Message.RecipientType.TO, to);
-			message.setSubject(subject);
-
-			MimeBodyPart mimeBodyPart = new MimeBodyPart();
-			mimeBodyPart.setContent(body, "text/plain");
-			
-			Multipart multipart = new MimeMultipart();
-			multipart.addBodyPart(mimeBodyPart);
-			
 			if (file != null) {
-				MimeBodyPart attachmentBodyPart = new MimeBodyPart();
-				attachmentBodyPart.attachFile(file);
-				multipart.addBodyPart(attachmentBodyPart);	
+				helper.addAttachment(file.getName(), file);
 			}
-			
-			message.setContent(multipart);
-			Transport.send(message);
-			
+
+			emailSender.send(message);
+
 			System.out.println("Mensagem enviada com sucesso!");
-			
-		} catch (Exception e) {
+
+		} catch (MessagingException e) {
 			System.out.println("Mensagem não enviada!");
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void send(InternetAddress from, InternetAddress to, String subject, String body) {
 		send(from, to, subject, body, null);
 	}

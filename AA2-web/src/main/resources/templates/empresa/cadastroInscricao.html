@@ -28,7 +28,7 @@
 				th:object="${inscricao}" method="POST">
 
 				<div class="form-row">
-					<div class="form-group col-md-6">
+					<div class="form-group">
 						<h4 th:text="#{inscricao.status.label}"/><br>
 						<input type="radio" id="status1" name="status" value="ABERTO" required>
 						<label for="status1" th:text="#{inscricao.status.open}"/><br>
@@ -41,6 +41,10 @@
 							<span th:errors="*{status}"></span>
 						</div>
 					</div>
+					
+				</div>
+				<div>
+					<textarea th:name="message" rows="5" cols="80"> </textarea>
 				</div>
 
 				<input type="hidden" id="id" th:field="*{id}" />
@@ -49,10 +53,9 @@
 				<input type="hidden" id="vaga" th:field="*{vaga}">
 				<input type="hidden" id="profissional" th:field="*{profissional}">
 
-				<center>
-					<button type="submit" th:text="#{button.salvar.label}"
-						class="btn btn-primary btn-sm"></button>
-				</center>
+				<button type="submit" th:text="#{button.salvar.label}"
+					class="btn btn-primary btn-sm mt-5">
+				</button>
 			</form>
 		</div>
 	</section>
