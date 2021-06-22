@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+	<section class="layout-content" layout:fragment="corpo">
+
+		<nav class="navbar navbar-expand-md bg-light">
+			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><i class="oi oi-caret-right"></i>
+						<span th:text="#{inscricao.cadastrar.label}"></span></li>
+				</ul>
+				<a class="btn btn-primary btn-md" th:href="@{/profissionais/listarInscricoes}"
+					role="button"> <span class="oi oi-spreadsheet" title="Listar"
+					aria-hidden="true"></span> <span th:text="#{inscricao.listar.label}"></span>
+				</a>
+			</div>
+		</nav>
+
+		<div class="container" id="cadastro">
+
+			<div th:replace="fragments/alert"></div>
+
+			<form
+				th:action="${inscricao.id == null} ? @{/profissionais/salvarInscricao} : @{/profissionais/editarInscricao}"
+				th:object="${inscricao}" method="POST">
+
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label th:text="#{inscricao.cv.label}" for="CV"></label> 
+						<input type="file" class="form-control" id="CV" autofocus="autofocus"
+							th:field="*{CV}" th:placeholder="#{inscricao.cv.label}":
+							th:classappend="${#fields.hasErrors('CV')} ? is-invalid" />
+
+						<div class="invalid-feedback">
+							<span th:errors="*{CV}"></span>
+						</div>
+					</div>
+				</div>
+
+				<input type="hidden" id="id" th:field="*{id}" />
+
+				<center>
+					<button type="submit" th:text="#{button.salvar.label}"
+						class="btn btn-primary btn-sm"></button>
+				</center>
+			</form>
+		</div>
+	</section>
+</body>
+</html>

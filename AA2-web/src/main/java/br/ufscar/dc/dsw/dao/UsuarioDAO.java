@@ -11,15 +11,17 @@ import br.ufscar.dc.dsw.domain.Usuario;
 @SuppressWarnings("unchecked")
 public interface UsuarioDAO extends CrudRepository<Usuario, Long>{
 
-		Usuario findById(long id);
+	Usuario findById(long id);
+	
+	Usuario findByEmail(String email);
 
-		List<Usuario> findAll();
+	List<Usuario> findAll();
 		
-		Usuario save(Usuario usuario);
+	Usuario save(Usuario usuario);
 		
-		void deleteById(Long id);
+	void deleteById(Long id);
 		
-	    @Query("SELECT u FROM Usuario u WHERE u.email = :email")
-	    public Usuario getUsuarioByEmail(@Param("email") String email);
+    @Query("SELECT u FROM Usuario u WHERE u.email = :email")
+    public Usuario getUsuarioByEmail(@Param("email") String email);
 	    
 }

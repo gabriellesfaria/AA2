@@ -1,7 +1,7 @@
 package br.ufscar.dc.dsw.domain;
 
 import java.util.List;
-
+import br.ufscar.dc.dsw.domain.Usuario;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -26,24 +26,11 @@ create table Profissional(
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Profissional")
-public class Profissional extends AbstractEntity<Long>{
+public class Profissional extends Usuario{
 	@NotBlank(message = "{NotBlank.profissional.cpf}")
-	@Size(min = 11, max = 11, message = "{Size.profissional.CPF}")
+	@Size(min = 14, max = 14, message = "{Size.profissional.CPF}")
 	@Column(nullable = false, unique = true, length = 60)
 	private String cpf;
-
-	@NotBlank(message = "{NotBlank.profissional.email}")
-	@Column(nullable = false, length = 60)
-	private String email;
-    
-	@NotBlank(message = "{NotBlank.profissional.senha}")
-	@Size(min = 6, message = "{Size.profissional.senha}")
-	@Column(nullable = false, length = 60)
-	private String senha;
-	
-	@NotNull(message = "{NotNull.profissional.nome}")
-	@Column(nullable = false, length = 60)
-	private String nome;
 
 	@NotNull(message = "{NotNull.profissional.telefone}")
 	@Size(min = 10, message="{Size.profissional.telefone}")
@@ -55,7 +42,6 @@ public class Profissional extends AbstractEntity<Long>{
 	private String sexo;
 
 	@NotNull(message = "{NotNull.profissional.nascimento}")
-	@Size(min = 6, max = 8, message="{Size.profissional.nascimento}")
 	@Column(nullable = false, length = 60)
 	private String nascimento;
 	
@@ -67,27 +53,6 @@ public class Profissional extends AbstractEntity<Long>{
 	}
 	public void setCPF(String cpf) {
 		this.cpf = cpf;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 	
 	public String getTelefone() {
@@ -109,5 +74,12 @@ public class Profissional extends AbstractEntity<Long>{
 	}
 	public void setNascimento(String nascimento) {
 		this.nascimento = nascimento;
+	}
+	
+	public List<Inscricao> getInscricao() {
+		return inscricoes;
+	}
+	public void setLivros(List<Inscricao> inscricoes) {
+		this.inscricoes = inscricoes;
 	}
 }

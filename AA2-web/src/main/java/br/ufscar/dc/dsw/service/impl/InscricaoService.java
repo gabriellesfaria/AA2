@@ -38,7 +38,7 @@ public class InscricaoService implements IInscricaoService {
 	}
 	
 	@Transactional(readOnly = true)
-	public List<Inscricao> buscarTodasPorProfissional(Profissional p) {
-		return dao.findAllByProfissional(p);
+	public List<Inscricao> buscarPorProfissional(Profissional p) {
+		return dao.findByProfissional(p);
 	}
 }

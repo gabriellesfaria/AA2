@@ -27,14 +27,15 @@ public class ProfissionalService implements IProfissionalService {
 	public Profissional buscarPorId(Long id) {
 		return dao.findById(id.longValue());
 	}
+	
+	@Transactional(readOnly = true)
+	public Profissional buscarPorEmail(String email) {
+		return dao.findByEmail(email);
+	}
+
 
 	@Transactional(readOnly = true)
 	public List<Profissional> buscarTodos() {
 		return dao.findAll();
-	}
-	
-	@Transactional(readOnly = true)
-	public boolean profissionalTemInscricao(Long id) {
-		return !dao.findById(id.longValue()).getInscricao().isEmpty(); 
 	}
 }

@@ -8,7 +8,12 @@
 
 		<div class="container" style="text-align: center;">
 			<h1><span th:text="#{title.label}"></span></h1>
-			<h2>Inserir tabela de inscricões feitas para este profissional</h2>
+			
+			<div sec:authorize="hasAuthority('ADMIN')">
+			</div>
+			
+			<div sec:authorize="hasAuthority('ADMIN')">
+			</div>
 		</div>
 
 	</section>

@@ -39,13 +39,13 @@ public class Vaga extends AbstractEntity<Long> {
 	@Column(nullable = false, length = 60)
 	private String nome;
 
-	@NotBlank(message = "{NotBlank.vaga.status}")
+	@NotNull(message = "{NotBlank.vaga.status}")
 	@Size(max = 60)
 	@Column(nullable = false, length = 60)
 	private String status;
     
 	@NotNull(message = "{NotNull.vaga.descricao}")
-	@Column(nullable = false, length = 5)
+	@Column(nullable = false, length = 60)
 	private String descricao;
 	
 	@NotNull(message = "{NotNull.vaga.salario}")
@@ -54,8 +54,7 @@ public class Vaga extends AbstractEntity<Long> {
 	private BigDecimal salario;
     
 	@NotNull(message = "{NotNull.vaga.datalimite}")
-	@Size(min = 6, max = 8, message="{Size.vaga.nascimento}")
-	@Column(nullable = false, length = 5)
+	@Column(nullable = false, length = 19)
 	private String datalimite;
 	
 	@NotNull(message = "{NotNull.vaga.empresa}")

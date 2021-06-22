@@ -30,20 +30,16 @@ public class Inscricao extends AbstractEntity<Long> {
 	@Column(nullable = false, length = 60)
 	private String cv;
 	
-	@NotBlank(message = "{NotBlank.inscricao.status}")
 	@Column(nullable = false, length = 60)
-	private String status;
+	private String status;  // ABERTO, NAO SELECIONADO OU ENTREVISTA
 	
-	@NotBlank(message = "{NotBlank.inscricao.datainscricao}")
-	@Column(nullable = false, length = 60)
-	private String datainscricao;
+	@Column(nullable = false, length = 19)
+	private String data;
 	
-	@NotNull(message = "{NotNull.inscricao.profissional}")
 	@ManyToOne // muitas inscrições possíveis para cada profissional
 	@JoinColumn(name = "profissional")
 	private Profissional profissional;
 	
-	@NotNull(message = "{NotNull.inscricao.vaga}")
 	@ManyToOne // muitas inscricoes em uma vaga apenas
 	@JoinColumn(name = "vaga")
 	private Vaga vaga;
@@ -62,11 +58,11 @@ public class Inscricao extends AbstractEntity<Long> {
 		this.status = status;
 	}
 	
-	public String getDataInscricao() {
-		return datainscricao;
+	public String getData() {
+		return data;
 	}
-	public void setDataInscricao(String datainscricao) {
-		this.datainscricao = datainscricao;
+	public void setData(String data) {
+		this.data = data;
 	}
 	
 	public Profissional getProfissional() {

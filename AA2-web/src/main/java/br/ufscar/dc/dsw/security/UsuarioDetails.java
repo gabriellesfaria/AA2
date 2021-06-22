@@ -7,31 +7,31 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import br.ufscar.dc.dsw.domain.Profissional;
+import br.ufscar.dc.dsw.domain.Usuario;
  
 @SuppressWarnings("serial")
-public class ProfissionalDetails implements UserDetails {
+public class UsuarioDetails implements UserDetails {
  
-    private Profissional profissional;
+    private Usuario usuario;
      
-    public ProfissionalDetails(Profissional profissional) {
-        this.profissional = profissional;
+    public UsuarioDetails(Usuario usuario) {
+        this.usuario = usuario;
     }
  
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(profissional.getRole());
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(usuario.getRole());
         return Arrays.asList(authority);
     }
  
     @Override
     public String getPassword() {
-        return profissional.getSenha();
+        return usuario.getSenha();
     }
  
     @Override
     public String getUsername() {
-        return profissional.getEmail();
+        return usuario.getEmail();
     }
  
     @Override
@@ -54,8 +54,8 @@ public class ProfissionalDetails implements UserDetails {
         return true;
     }
 
-	public Profissional getProfissional() {
-		return profissional;
+	public Usuario getUsuario() {
+		return usuario;
 	}
     
 }

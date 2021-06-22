@@ -3,6 +3,7 @@ package br.ufscar.dc.dsw.service.spec;
 import java.util.List;
 
 import br.ufscar.dc.dsw.domain.Vaga;
+import br.ufscar.dc.dsw.domain.Empresa;
 
 public interface IVagaService {
 
@@ -10,8 +11,12 @@ public interface IVagaService {
 	
 	List<Vaga> buscarTodas();
 	
+	List<Vaga> buscarPorEmpresa(Empresa empresa);
+	
 	void salvar(Vaga livro);
 	
 	void excluir(Long id);
+	
+	
 	
 }

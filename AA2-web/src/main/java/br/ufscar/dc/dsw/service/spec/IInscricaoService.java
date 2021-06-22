@@ -11,9 +11,9 @@ public interface IInscricaoService {
 	
 	List<Inscricao> buscarTodas();
 	
-	List<Inscricao> buscarTodasPorProfissional(Profissional p);
+	List<Inscricao> buscarPorProfissional(Profissional p);
 	
-	void salvar(Inscricao livro);
+	void salvar(Inscricao inscricao);
 	
 	void excluir(Long id);
 }

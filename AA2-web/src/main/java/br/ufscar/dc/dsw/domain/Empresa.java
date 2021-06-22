@@ -25,25 +25,12 @@ create table Empresa(
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Empresa")
-public class Empresa extends AbstractEntity<Long> {
+public class Empresa extends Usuario{
 
 	@NotBlank(message = "{NotBlank.empresa.CNPJ}")
 	@Size(min = 18, max = 18, message = "{Size.profissional.CNPJ}")
 	@Column(nullable = false, length = 60)
 	private String cnpj;
-
-	@NotBlank(message = "{NotBlank.empresa.email}")
-	@Column(nullable = false, length = 60)
-	private String email;
-    
-	@NotBlank(message = "{NotBlank.empresa.senha}")
-	@Size(min = 6, message = "{Size.empresa.senha}")
-	@Column(nullable = false, length = 60)
-	private String senha;
-	
-	@NotBlank(message = "{NotBlank.empresa.nome}")
-	@Column(nullable = false, length = 60)
-	private String nome;
     
 	@NotNull(message = "{NotNull.empresa.descricao}")
 	@Column(nullable = false, length = 200)
@@ -55,8 +42,6 @@ public class Empresa extends AbstractEntity<Long> {
 	
 	@OneToMany(mappedBy = "empresa")
 	private List<Vaga> vagas;
-	
-
 
 	public String getCNPJ() {
 		return cnpj;
@@ -64,26 +49,12 @@ public class Empresa extends AbstractEntity<Long> {
 	public void setCNPJ(String cnpj) {
 		this.cnpj = cnpj;
 	}
-
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
 	
-	public String getSenha() {
-		return senha;
+	public String getCidade() {
+		return cidade;
 	}
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-	
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
 	}
 	
 	public String getDescricao() {
@@ -92,11 +63,11 @@ public class Empresa extends AbstractEntity<Long> {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
-	public String getCidade() {
-		return cidade;
+
+	public List<Vaga> getVagas() {
+		return vagas;
 	}
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
+	public void setVagas(List<Vaga> vagas) {
+		this.vagas = vagas;
 	}
 }

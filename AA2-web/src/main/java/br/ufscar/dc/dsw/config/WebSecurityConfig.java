@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.*;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import br.ufscar.dc.dsw.security.ProfissionalDetailsServiceImpl;
+import br.ufscar.dc.dsw.security.UsuarioDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -16,7 +16,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public UserDetailsService userDetailsService() {
-		return new ProfissionalDetailsServiceImpl();
+		return new UsuarioDetailsServiceImpl();
 	}
 
 	@Bean
@@ -42,9 +42,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 				http.authorizeRequests()
 				.antMatchers("/error", "/login/**", "/js/**", "/css/**", "/image/**", "/webjars/**").permitAll()
-				.antMatchers("/profissionais/**", "/empresas/**").hasRole("ROLE_ADMIN")
-				.antMatchers("/inscricoes/**").hasRole("ROLE_PROFISSIONAL")
-				.antMatchers("/vagas/**").hasRole("ROLE_EMPRESA")
+				.antMatchers("/profissionais/**").hasAuthority("PROFISSIONAL")
+				.antMatchers("/empresas/**").hasAuthority("EMPRESA")
+				.antMatchers("/admins/**").hasAuthority("ADMIN")
 				.anyRequest().authenticated()
 			.and()
 				.formLogin()

@@ -4,8 +4,8 @@ import br.ufscar.dc.dsw.domain.Profissional;
 
 public interface IProfissionalService {
 	Profissional buscarPorId(Long id);
+	Profissional buscarPorEmail(String email);
 	List<Profissional> buscarTodos();
 	void salvar(Profissional profissional);
 	void excluir(Long id);
-	boolean profissionalTemInscricao(Long id);
 }

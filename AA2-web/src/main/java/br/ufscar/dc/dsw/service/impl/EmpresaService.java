@@ -3,12 +3,18 @@ package br.ufscar.dc.dsw.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.dc.dsw.dao.EmpresaDAO;
 import br.ufscar.dc.dsw.domain.Empresa;
+import br.ufscar.dc.dsw.domain.Profissional;
+import br.ufscar.dc.dsw.service.spec.IEmpresaService;
 
-public class EmpresaService {
+@Service
+@Transactional(readOnly = false)
+public class EmpresaService implements IEmpresaService {
+	
 	@Autowired
 	EmpresaDAO dao;
 	
@@ -31,7 +37,7 @@ public class EmpresaService {
 	}
 	
 	@Transactional(readOnly = true)
-	public boolean empresaTemVaga(Long id) {
-		return !dao.findById(id.longValue()).getVagas().isEmpty(); 
+	public Empresa buscarPorEmail(String email) {
+		return dao.findByEmail(email);
 	}
 }
