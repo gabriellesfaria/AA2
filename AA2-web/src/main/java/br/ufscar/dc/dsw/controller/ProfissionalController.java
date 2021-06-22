@@ -42,7 +42,19 @@ public class ProfissionalController {
 		
 	
 	@GetMapping("/cadastrarInscricao/{id}")
-	public String cadastrar( @PathVariable("id") long id, Inscricao inscricao, Principal principal) {		
+	public String cadastrar(@PathVariable("id") Long id, ModelMap model, Principal principal) {
+		Vaga vaga = vagaService.buscarPorId(id);
+		System.out.println(vaga.getNome());
+		Profissional profissional = profissionalService.buscarPorEmail(principal.getName());
+		String data = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
+		Inscricao inscricao = new Inscricao();
+		inscricao.setProfissional(profissional);
+		inscricao.setVaga(vaga);
+		inscricao.setStatus("ABERTO"); 
+		inscricao.setData(data);
+
+		model.addAttribute("inscricao", inscricao);
+
 		return "profissional/cadastro";
 	}
 	
@@ -69,20 +81,14 @@ public class ProfissionalController {
 		return "profissional/listaVagas";
 	}
 	
-	@PostMapping("/salvarInscricao/{id}")
-	public String salvar(Principal principal, @PathVariable("id") Long id, @Valid Inscricao inscricao, BindingResult result, RedirectAttributes attr) {
-		
+	@PostMapping("/salvarInscricao")
+	public String salvar(Principal principal, @Valid Inscricao inscricao, BindingResult result, RedirectAttributes attr) {
+
 		if (result.hasErrors()) {
-			System.out.println("result em salvar: " + result);
+			System.out.println(result.getAllErrors().get(0).toString());
 			return "profissional/cadastro";
 		}
-		Vaga vaga = vagaService.buscarPorId(id);
-		Profissional profissional = profissionalService.buscarPorEmail(principal.getName());
-		String data = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
-		inscricao.setProfissional(profissional);
-		inscricao.setVaga(vaga);
-		inscricao.setStatus("ABERTO"); 
-		inscricao.setData(data);
+
 		inscricaoService.salvar(inscricao);
 		attr.addFlashAttribute("sucess", "Inscricao inserida com sucesso.");
 		return "redirect:/profissionais/listarInscricoes";
@@ -98,7 +104,7 @@ public class ProfissionalController {
 	public String editar(@Valid Inscricao inscricao, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
-			System.out.println("result em editar: " + result);
+			System.out.println(result.getAllErrors().get(0).toString());
 			return "profissional/cadastro";
 		}
 

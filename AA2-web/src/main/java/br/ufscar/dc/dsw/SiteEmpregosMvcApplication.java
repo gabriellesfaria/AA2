@@ -90,7 +90,7 @@ public class SiteEmpregosMvcApplication {
 			Inscricao i1 = new Inscricao();
 			i1.setStatus("ABERTO");
 			i1.setCV("curriculoMario.pdf");
-			i1.setData("21/06/2021");
+			i1.setData("22/06/2021");
 			i1.setProfissional(p1);
 			i1.setVaga(v1);
 			inscricaoDAO.save(i1);

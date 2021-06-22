@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.security.Principal;
 
 import javax.validation.Valid;
+
+import org.codehaus.groovy.runtime.powerassert.SourceText;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -27,6 +29,7 @@ import br.ufscar.dc.dsw.domain.Usuario;
 
 import br.ufscar.dc.dsw.dao.UsuarioDAO;
 import br.ufscar.dc.dsw.service.spec.IVagaService;
+import br.ufscar.dc.dsw.service.impl.EmpresaService;
 import br.ufscar.dc.dsw.service.spec.IEmpresaService;
 import br.ufscar.dc.dsw.service.spec.IUsuarioService;
 import br.ufscar.dc.dsw.service.spec.IProfissionalService;
@@ -75,18 +78,19 @@ public class AdminController {
 	public String salvarEmpresa(@Valid Empresa empresa, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
+			// System.out.println(result.getAllErrors().get(0).toString());
 			return "admin/cadastroEmpresa";
 		}
 		
 		empresaService.salvar(empresa);
 		attr.addFlashAttribute("sucess", "Empresa inserida com sucesso.");
-		return "redirect:/admin/listarEmpresas";
+		return "redirect:/admins/listarEmpresas";
 	}
 
 	@GetMapping("/editarEmpresa/{id}")
 	public String preEditarEmpresa(@PathVariable("id") Long id, ModelMap model) {
-		model.addAttribute("profissional", profissionalService.buscarPorId(id));
-		return "admin/cadastroProfissional";
+		model.addAttribute("empresa", empresaService.buscarPorId(id));
+		return "admin/cadastroEmpresa";
 	}
 	
 	
@@ -94,12 +98,13 @@ public class AdminController {
 	public String editarEmpresa(@Valid Empresa empresa, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
-			return "admin/cadastroEmpresa";
+			// System.out.println(result.getAllErrors().get(0).toString());
+			return "admin/listaEmpresa";
 		}
 
 		empresaService.salvar(empresa);
 		attr.addFlashAttribute("sucess", "Empresa editada com sucesso.");
-		return "redirect:/admin/listarEmpresas";
+		return "redirect:/admins/listarEmpresas";
 	}
 
 	@GetMapping("/listarProfissionais")
@@ -126,12 +131,13 @@ public class AdminController {
 	public String salvarProfissional(@Valid Profissional profissional, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
+			// System.out.println(result.getAllErrors().get(0).toString());
 			return "admin/cadastroProfissional";
 		}
 		
 		profissionalService.salvar(profissional);
 		attr.addFlashAttribute("sucess", "Profissional inserido com sucesso.");
-		return "redirect:/admin/listarProfissionais";
+		return "redirect:/admins/listarProfissionais";
 	}
 	
 	@GetMapping("/editarProfissional/{id}")
@@ -144,12 +150,13 @@ public class AdminController {
 	public String editarProfissional(@Valid Profissional profissional, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
+			// System.out.println(result.getAllErrors().get(0).toString());
 			return "admin/cadastroProfissional";
 		}
 
 		profissionalService.salvar(profissional);
 		attr.addFlashAttribute("sucess", "Profissional editado com sucesso.");
-		return "redirect:/admin/listarProfissionais";
+		return "redirect:/admins/listarProfissionais";
 	}
 	
 }

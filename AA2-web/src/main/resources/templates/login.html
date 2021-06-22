@@ -7,8 +7,8 @@
 <body>
 	<div layout:fragment="content" th:remove="tag">
 		<br /> <br /> <br />
-		<div>
-			<div class="col-md-6">
+		<div class="d-flex flex-row">
+			<div class="col-6">
 				<h1 th:text="#{login.message}"></h1>
 				<form th:action="@{/login}" method="post">
 					<div th:if="${param.error}">
@@ -35,6 +35,9 @@
 						</div>
 					</div>
 				</form>
+			</div>
+			<div class="col-6">
+				<h1 th:text="#{login.vacancies}"></h1>
 			</div>
 		</div>
 	</div>

@@ -44,12 +44,12 @@
 							<td th:text="${empresa.descricao}"></td>
 							<td th:text="${empresa.cidade}"></td>
 							<td colspan="2">
-								<a class="btn btn-info btn-sm" th:href="@{/admin/editarEmpresa/{id} (id=${empresa.id}) }"
+								<a class="btn btn-info btn-sm" th:href="@{/admins/editarEmpresa/{id} (id=${empresa.id}) }"
 									role="button"> 
 									<span class="oi oi-pencil" th:title="#{link.editar.label}" aria-hidden="true"> </span>
 								</a>
 								<button
-									th:id="${'admin/excluirEmpresa/' + empresa.id}"
+									th:id="${'btn_admins/excluirEmpresa/' + empresa.id}"
 									type="button" class="btn btn-danger btn-sm"
 									data-toggle="modal" data-target="#myModal">
 									<span class="oi oi-circle-x" th:title="#{link.excluir.label}" aria-hidden="true"></span>

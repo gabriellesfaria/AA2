@@ -83,27 +83,45 @@ public class EmpresaController {
 	
 	@GetMapping("/listarInscritos")
 	public String listar(ModelMap model, Principal principal) {
-		
+
 		Empresa empresa = empresaService.buscarPorEmail(principal.getName());
-		
+
 		List<Vaga> vagas = vagaService.buscarPorEmpresa(empresa);
-						
+
 		List<Inscricao> todasInscricoes = inscricaoService.buscarTodas();
-		
+
 		List<Inscricao> inscricoesEmpresa = new ArrayList<Inscricao>();
 
-		for (Vaga v: vagas) {
-			for (Inscricao i: todasInscricoes) {
-				if(i.getVaga() == v) { // inscrito de vaga da empresa
+		for (Vaga v : vagas) {
+			for (Inscricao i : todasInscricoes) {
+				if (i.getVaga() == v) { // inscrito de vaga da empresa
 					inscricoesEmpresa.add(i);
+					System.out.println(i);
 				}
 			}
 		}
-		model.addAttribute("inscricoesEmpresa");
-				
-		model.addAttribute(empresa);
-		
+		model.addAttribute("inscricoesEmpresa", inscricoesEmpresa);
+
 		return "empresa/listaInscritos";
+	}
+
+	@GetMapping("/editarInscricao/{id}")
+	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
+		model.addAttribute("inscricao", inscricaoService.buscarPorId(id));
+		return "empresa/cadastroInscricao";
+	}
+	
+	@PostMapping("/editarInscricao")
+	public String editar(@Valid Inscricao inscricao, BindingResult result, RedirectAttributes attr) {
+		
+		if (result.hasErrors()) {
+			System.out.println(result.getAllErrors().get(0).toString());
+			return "empresa/cadastroInscricao";
+		}
+
+		inscricaoService.salvar(inscricao);
+		attr.addFlashAttribute("sucess", "Profissional editado com sucesso.");
+		return "redirect:/empresas/listarInscritos";
 	}
 	
 }

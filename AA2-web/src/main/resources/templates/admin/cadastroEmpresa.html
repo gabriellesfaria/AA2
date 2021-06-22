@@ -41,9 +41,9 @@
 					</div>
 					<div class="form-group col-md-6">
 						<label th:text="#{empresa.email.label}" for="email"></label> 
-						<input type="text" class="form-control" id="email"
+						<input type="email" class="form-control" id="email"
 							th:placeholder="#{empresa.email.label}"
-							autofocus="autofocus" th:field="*{nome}"
+							autofocus="autofocus" th:field="*{email}"
 							th:classappend="${#fields.hasErrors('email')} ? is-invalid" />
 
 						<div class="invalid-feedback">
@@ -100,6 +100,7 @@
 					</div>
 					</div>
 					<input type="hidden" th:field="*{id}" id="id">
+					<input type="hidden" name="role" value="EMPRESA">
 				<button type="submit" th:text="#{button.salvar.label}"
 					class="btn btn-primary btn-sm"></button>
 			</form>

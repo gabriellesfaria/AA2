@@ -12,7 +12,7 @@
 					<li class="nav-item active"><i class="oi oi-caret-right"></i>
 						<span th:text="#{inscricao.cadastrar.label}"></span></li>
 				</ul>
-				<a class="btn btn-primary btn-md" th:href="@{/profissionais/listarInscricoes}"
+				<a class="btn btn-primary btn-md" th:href="@{/empresas/listarInscricoes}"
 					role="button"> <span class="oi oi-spreadsheet" title="Listar"
 					aria-hidden="true"></span> <span th:text="#{inscricao.listar.label}"></span>
 				</a>
@@ -24,24 +24,27 @@
 			<div th:replace="fragments/alert"></div>
 
 			<form
-				th:action="${inscricao.id == null} ? @{/profissionais/salvarInscricao} : @{/profissionais/editarInscricao/}"
+				th:action="@{/empresas/editarInscricao/}"
 				th:object="${inscricao}" method="POST">
 
 				<div class="form-row">
 					<div class="form-group col-md-6">
-						<label th:text="#{inscricao.cv.label}" for="CV"></label> 
-						<input type="text" class="form-control" id="CV" autofocus="autofocus"
-							th:field="*{CV}" th:placeholder="#{inscricao.cv.label}":
-							th:classappend="${#fields.hasErrors('CV')} ? is-invalid" />
-
+						<h4 th:text="#{inscricao.status.label}"/><br>
+						<input type="radio" id="status1" name="status" value="ABERTO" required>
+						<label for="status1" th:text="#{inscricao.status.open}"/><br>
+						<input type="radio" id="status2" name="status" value="REJEITADO">
+						<label for="status2" th:text="#{inscricao.status.rejected}"/><br>
+						<input type="radio" id="status3" name="status" value="ENTREVISTA">
+						<label for="status3" th:text="#{inscricao.status.chosen}"/>
+							
 						<div class="invalid-feedback">
-							<span th:errors="*{CV}"></span>
+							<span th:errors="*{status}"></span>
 						</div>
 					</div>
 				</div>
 
 				<input type="hidden" id="id" th:field="*{id}" />
-				<input type="hidden" id="status" th:field="*{status}">
+				<input type="hidden" id="CV" th:field="*{CV}">
 				<input type="hidden" id="data" th:field="*{data}">
 				<input type="hidden" id="vaga" th:field="*{vaga}">
 				<input type="hidden" id="profissional" th:field="*{profissional}">
