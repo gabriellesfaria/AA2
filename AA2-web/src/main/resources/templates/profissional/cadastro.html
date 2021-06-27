@@ -30,7 +30,7 @@
 				<div class="form-row">
 					<div class="form-group col-md-6">
 						<label th:text="#{inscricao.cv.label}" for="CV"></label> 
-						<input type="file" class="form-control" id="CV" autofocus="autofocus"
+						<input type="text" class="form-control" id="CV" autofocus="autofocus"
 							th:field="*{CV}" th:placeholder="#{inscricao.cv.label}":
 							th:classappend="${#fields.hasErrors('CV')} ? is-invalid" />
 

@@ -27,6 +27,7 @@
 				th:action="@{/empresas/editarInscricao/}"
 				th:object="${inscricao}" method="POST">
 
+<<<<<<< HEAD
 				<div class="form-row">					
 					<div class="form-group col-md-6">
 					<label th:text="#{inscricao.status.label}" for="status"></label>
@@ -54,6 +55,27 @@
 						<input type="time" class="form-control"/>							
 				</div>
 				
+=======
+				<div class="form-row">
+					<div class="form-group">
+						<h4 th:text="#{inscricao.status.label}"/><br>
+						<input type="radio" id="status1" name="status" value="ABERTO" required>
+						<label for="status1" th:text="#{inscricao.status.open}"/><br>
+						<input type="radio" id="status2" name="status" value="REJEITADO">
+						<label for="status2" th:text="#{inscricao.status.rejected}"/><br>
+						<input type="radio" id="status3" name="status" value="ENTREVISTA">
+						<label for="status3" th:text="#{inscricao.status.chosen}"/>
+							
+						<div class="invalid-feedback">
+							<span th:errors="*{status}"></span>
+						</div>
+					</div>
+					
+				</div>
+				<div>
+					<textarea th:name="message" rows="5" cols="80"> </textarea>
+				</div>
+>>>>>>> 4b5191eb41e7e474a00eba13e1bce087ae498538
 
 				<input type="hidden" id="id" th:field="*{id}" />
 				<input type="hidden" id="CV" th:field="*{CV}">

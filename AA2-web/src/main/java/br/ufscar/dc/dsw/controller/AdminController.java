@@ -3,6 +3,10 @@ package br.ufscar.dc.dsw.controller;
 
 import javax.validation.Valid;
 
+<<<<<<< HEAD
+=======
+import org.codehaus.groovy.runtime.powerassert.SourceText;
+>>>>>>> 4b5191eb41e7e474a00eba13e1bce087ae498538
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,6 +19,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufscar.dc.dsw.domain.Empresa;
 import br.ufscar.dc.dsw.domain.Profissional;
+<<<<<<< HEAD
+=======
+import br.ufscar.dc.dsw.domain.Vaga;
+import br.ufscar.dc.dsw.domain.Usuario;
+
+import br.ufscar.dc.dsw.dao.UsuarioDAO;
+import br.ufscar.dc.dsw.service.spec.IVagaService;
+import br.ufscar.dc.dsw.service.impl.EmpresaService;
+>>>>>>> 4b5191eb41e7e474a00eba13e1bce087ae498538
 import br.ufscar.dc.dsw.service.spec.IEmpresaService;
 import br.ufscar.dc.dsw.service.spec.IProfissionalService;
 
