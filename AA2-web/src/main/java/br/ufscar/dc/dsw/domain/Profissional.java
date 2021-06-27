@@ -1,7 +1,6 @@
 package br.ufscar.dc.dsw.domain;
 
 import java.util.List;
-import br.ufscar.dc.dsw.domain.Usuario;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;

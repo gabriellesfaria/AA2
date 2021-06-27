@@ -2,6 +2,7 @@ package br.ufscar.dc.dsw.dao;
 
 import org.springframework.data.repository.CrudRepository;
 import java.util.List;
+import java.util.ArrayList;
 import br.ufscar.dc.dsw.domain.Vaga;
 import br.ufscar.dc.dsw.domain.Empresa;
 

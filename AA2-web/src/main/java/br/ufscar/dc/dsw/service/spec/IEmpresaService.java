@@ -1,9 +1,7 @@
 package br.ufscar.dc.dsw.service.spec;
 
 import java.util.List;
-
 import br.ufscar.dc.dsw.domain.Empresa;
-import br.ufscar.dc.dsw.domain.Profissional;
 
 public interface IEmpresaService {
 	

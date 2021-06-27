@@ -1,45 +1,26 @@
 package br.ufscar.dc.dsw.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.List;
-import java.util.ArrayList;
-import java.security.Principal;
 
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 import br.ufscar.dc.dsw.domain.Empresa;
-import br.ufscar.dc.dsw.domain.Inscricao;
 import br.ufscar.dc.dsw.domain.Profissional;
-import br.ufscar.dc.dsw.domain.Vaga;
-import br.ufscar.dc.dsw.domain.Usuario;
-
-import br.ufscar.dc.dsw.dao.UsuarioDAO;
-import br.ufscar.dc.dsw.service.spec.IVagaService;
 import br.ufscar.dc.dsw.service.spec.IEmpresaService;
-import br.ufscar.dc.dsw.service.spec.IUsuarioService;
 import br.ufscar.dc.dsw.service.spec.IProfissionalService;
-import br.ufscar.dc.dsw.service.spec.IInscricaoService;
+
 @Controller
 @RequestMapping("/admins")
 public class AdminController {
-	
-	@Autowired
-	private IVagaService vagaService;
-	
-	@Autowired
-	private IInscricaoService inscricaoService;
 
 	@Autowired
 	private IProfissionalService profissionalService;
@@ -47,8 +28,6 @@ public class AdminController {
 	@Autowired
 	private IEmpresaService empresaService;
 	
-	@Autowired
-	private IUsuarioService usuarioService;
 	
 	@GetMapping("/listarEmpresas")
 	public String listarEmpresas(ModelMap model) {
@@ -75,18 +54,19 @@ public class AdminController {
 	public String salvarEmpresa(@Valid Empresa empresa, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
+			// System.out.println(result.getAllErrors().get(0).toString());
 			return "admin/cadastroEmpresa";
 		}
 		
 		empresaService.salvar(empresa);
 		attr.addFlashAttribute("sucess", "Empresa inserida com sucesso.");
-		return "redirect:/admin/listarEmpresas";
+		return "redirect:/admins/listarEmpresas";
 	}
 
 	@GetMapping("/editarEmpresa/{id}")
 	public String preEditarEmpresa(@PathVariable("id") Long id, ModelMap model) {
-		model.addAttribute("profissional", profissionalService.buscarPorId(id));
-		return "admin/cadastroProfissional";
+		model.addAttribute("empresa", empresaService.buscarPorId(id));
+		return "admin/cadastroEmpresa";
 	}
 	
 	
@@ -94,12 +74,13 @@ public class AdminController {
 	public String editarEmpresa(@Valid Empresa empresa, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
-			return "admin/cadastroEmpresa";
+			// System.out.println(result.getAllErrors().get(0).toString());
+			return "admin/listaEmpresa";
 		}
 
 		empresaService.salvar(empresa);
 		attr.addFlashAttribute("sucess", "Empresa editada com sucesso.");
-		return "redirect:/admin/listarEmpresas";
+		return "redirect:/admins/listarEmpresas";
 	}
 
 	@GetMapping("/listarProfissionais")
@@ -126,12 +107,13 @@ public class AdminController {
 	public String salvarProfissional(@Valid Profissional profissional, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
+			// System.out.println(result.getAllErrors().get(0).toString());
 			return "admin/cadastroProfissional";
 		}
 		
 		profissionalService.salvar(profissional);
 		attr.addFlashAttribute("sucess", "Profissional inserido com sucesso.");
-		return "redirect:/admin/listarProfissionais";
+		return "redirect:/admins/listarProfissionais";
 	}
 	
 	@GetMapping("/editarProfissional/{id}")
@@ -144,12 +126,13 @@ public class AdminController {
 	public String editarProfissional(@Valid Profissional profissional, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
+			// System.out.println(result.getAllErrors().get(0).toString());
 			return "admin/cadastroProfissional";
 		}
 
 		profissionalService.salvar(profissional);
 		attr.addFlashAttribute("sucess", "Profissional editado com sucesso.");
-		return "redirect:/admin/listarProfissionais";
+		return "redirect:/admins/listarProfissionais";
 	}
 	
 }

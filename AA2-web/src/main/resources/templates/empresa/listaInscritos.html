@@ -27,36 +27,30 @@
 					<thead>
 						<tr>
 							<th class="bg-warning">#</th>
+							<th class="bg-warning" th:text="#{inscricao.profissional.label}"></th>
 							<th class="bg-warning" th:text="#{inscricao.cv.label}"></th>
 							<th class="bg-warning" th:text="#{inscricao.status.label}"></th>
 							<th class="bg-warning" th:text="#{inscricao.data.label}"></th>
 							<th class="bg-warning" th:text="#{inscricao.vaga.label}"></th>
-							<th class="bg-warning" th:text="#{inscricao.empresa.label}"></th>
 							<th class="bg-warning" th:text="#{inscricao.cidade.label}"></th>
 							<th class="bg-warning" th:text="#{inscricao.acoes.label}"></th>
 
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="inscricao : ${inscricoesEmpresa}">
+						<tr th:each="inscricao : ${inscricoes}">
 							<td th:text="${inscricao.id}"></td>
+							<td th:text="${inscricao.profissional.nome}"></td>
 							<td th:text="${inscricao.CV}"></td>
 							<td th:text="${inscricao.status}"></td>
 							<td th:text="${inscricao.data}"></td>
 							<td th:text="${inscricao.vaga.nome}"></td>
-							<td th:text="${inscricao.vaga.empresa.nome}"></td>
 							<td th:text="${inscricao.vaga.empresa.cidade}"></td>
-							<td colspan="2">
+							<td colspan="1" class="d-flex justify-content-around">
 								<a class="btn btn-info btn-sm" th:href="@{/empresas/editarInscricao/{id} (id=${inscricao.id}) }"
 									role="button"> 
 									<span class="oi oi-pencil" th:title="#{link.editar.label}" aria-hidden="true"> </span>
 								</a>
-								<button
-									th:id="${'empresas/excluir/' + inscricao.id}"
-									type="button" class="btn btn-danger btn-sm"
-									data-toggle="modal" data-target="#myModal">
-									<span class="oi oi-circle-x" th:title="#{link.excluir.label}" aria-hidden="true"></span>
-								</button>
 							</td>
 						</tr>
 					</tbody>

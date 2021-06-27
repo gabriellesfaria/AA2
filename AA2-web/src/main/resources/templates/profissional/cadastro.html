@@ -24,7 +24,7 @@
 			<div th:replace="fragments/alert"></div>
 
 			<form
-				th:action="${inscricao.id == null} ? @{/profissionais/salvarInscricao} : @{/profissionais/editarInscricao}"
+				th:action="${inscricao.id == null} ? @{/profissionais/salvarInscricao} : @{/profissionais/editarInscricao/}"
 				th:object="${inscricao}" method="POST">
 
 				<div class="form-row">
@@ -41,6 +41,10 @@
 				</div>
 
 				<input type="hidden" id="id" th:field="*{id}" />
+				<input type="hidden" id="status" th:field="*{status}">
+				<input type="hidden" id="data" th:field="*{data}">
+				<input type="hidden" id="vaga" th:field="*{vaga}">
+				<input type="hidden" id="profissional" th:field="*{profissional}">
 
 				<center>
 					<button type="submit" th:text="#{button.salvar.label}"
